@@ -1,0 +1,4 @@
+FROM fedora-minimal
+
+RUN microdnf install -y nss-tools openssl
+COPY nss-secert-importer.sh nss-secert-importer.sh

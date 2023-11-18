@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-cert-importer
+spec:
+  restartPolicy: Never
+  volumes:
+    - name: cert-volume
+      secret:
+        secretName: ipsec-example
+    - name: var-lib-ipsec-nss
+      path: /var/lib/ipsec/nss
+      type: Directory
+  containers:
+    - name: test-container
+      image: quay.io/ykashtan/nss-tools:latest
+      imagePullPolicy: Always
+      env:
+        - name: NSS_DB_DIR
+          value: /host/nss
+      command:
+        - sh
+        - -c 
+        - "while true; do sleep 30; done;"
+      volumeMounts:
+        - name: cert-volume
+          readOnly: true
+          mountPath: "/certs"
+        - name: var-lib-ipsec-nss
+          mountPath: /host/nss

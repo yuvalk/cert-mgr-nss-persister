@@ -1,0 +1,27 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ipsec-example
+  namespace: default
+spec:
+  secretName: ipsec-example
+  issuerRef:
+    name: ca-issuer
+    kind: Issuer
+    group: cert-manager.io
+  ipAddresses:
+    - 192.168.124.120
+    - 192.168.124.245
+    - 192.168.124.59
+    - 192.168.124.253
+  usages:
+    - server auth
+    - client auth
+  commonName: cluster.cert
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
