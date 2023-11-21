@@ -7,4 +7,10 @@ layout:
 - go.kubebuilder.io/v4
 projectName: cert-mgr-nss-persister
 repo: telco5g.redhat.com/nss
+resources:
+- controller: true
+  domain: telco5g.redhat.com
+  group: cert-manager.io
+  kind: Certificates
+  version: v1beta1
 version: "3"
