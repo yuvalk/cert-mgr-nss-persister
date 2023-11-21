@@ -13,11 +13,13 @@ spec:
       type: Directory
   containers:
     - name: test-container
-      image: quay.io/ykashtan/nss-tools:latest
+      image: quay.io/ykashtan/nss-secert-persister:latest
       imagePullPolicy: Always
       env:
         - name: NSS_DB_DIR
           value: /host/nss
+        - name: TMP_PASS
+          value: password
       command:
         - sh
         - -c 
